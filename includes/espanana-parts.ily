@@ -476,6 +476,30 @@ dynamics = {
   s2. |
 }
 
+forceBreaks = {
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak 
+  \repeat unfold 4 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 5 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 6 { s2.\noBreak } s2.\break\noPageBreak 
+  \repeat unfold 3 { s2.\noBreak } s2.\pageBreak
+}
+
 % -----------------------
 % --- Layout and MIDI ---
 % -----------------------
@@ -509,6 +533,7 @@ musicEspanana = \score {
     \new Staff = "upper" \upper
     \new Dynamics { \global \dynamics }
     \new Staff = "lower" \lower
+    \new Devnull \forceBreaks
   >>
   \header {
     title = ""

@@ -481,6 +481,25 @@ dynamics = {
   s8 s \! s4 |
 }
 
+forceBreaks = {
+  \repeat unfold 3 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 3 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 3 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 5 { s2\noBreak } s2\pageBreak
+  
+  \repeat unfold 4 { s2\noBreak } s4\break\noPageBreak % half a measure
+  s4\noBreak \repeat unfold 3 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 4 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 5 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 5 { s2\noBreak } s2\pageBreak
+  
+  \repeat unfold 3 { s2\noBreak } s4\break\noPageBreak % half a measure
+  s4\noBreak \repeat unfold 3 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 3 { s2\noBreak } s4\break\noPageBreak % half a measure
+  s4\noBreak \repeat unfold 3 { s2\noBreak } s2\break\noPageBreak
+  \repeat unfold 3 { s2\noBreak } s2\pageBreak
+}
+
 % -----------------------
 % --- Layout and MIDI ---
 % -----------------------
@@ -513,6 +532,7 @@ musicDanse = \score {
     \new Staff = "upper" \upper
     \new Dynamics { \global \dynamics }
     \new Staff = "lower" \lower
+    \new Devnull \forceBreaks
   >>
   \header {
     title = ""

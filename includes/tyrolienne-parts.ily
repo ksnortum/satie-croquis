@@ -317,6 +317,25 @@ dynamics = {
   s2. |
 }
 
+forceBreaks = {
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 5 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\pageBreak
+  
+}
+
 % -----------------------
 % --- Layout and MIDI ---
 % -----------------------
@@ -341,6 +360,7 @@ lower = {
   <<
     \new Voice { \voiceThree \lowerMiddle }
     \new Voice { \voiceFour \lowVoice }
+    \new Devnull \forceBreaks
   >>
 }
 
