@@ -12,6 +12,24 @@
 % --- Definitions ---
 % -------------------
 
+shortenStemA = \tweak Stem.length 8 \etc
+beamLengthsA = \tweak Beam.positions #'(-3.5 . -4) \etc
+accentInsideSlur = \override Script.avoid-slur = #'inside
+moveTextA = \tweak X-offset -2 \etc
+
+slurShapeA = \shape #'(
+                        ()
+                        ()
+                        ()
+                        ((0 . 0) (0 . -7) (0 . -5) (0 . 4))
+                      ) \etc
+slurShapeB = \shape #'((0 . 0) (0 . 0) (0 . -1) (-0.5 . 2)) \etc
+
+oneVoiceRest =
+#(define-music-function (rest) (ly:music?)
+  #{
+    \oneVoice #rest \voiceFour
+  #})
 
 % --- Musical text
 lent = "Avec précaution et lent "
@@ -19,7 +37,9 @@ gosier = "Dans le gosier"
 chaud = "Un peu chaud"
 yeux = "Du bout des yeux et retenu d'avance"
 expression = "Beaucoup d'expression et plus lent"
+tresTurc = "Très Turc"
 impassible = "Impassible"
+reprendre = "Reprendre"
 encore = "Encore"
 saignant = "peu saignant"
 retardez = "retardez"
@@ -56,7 +76,8 @@ highVoice = \relative {
   s2. * 4 |
   
   \barNumberCheck #25
-  g,8 ^\expression (g' g, g' a,-> a' |
+  \accentInsideSlur
+  g,8 ^\expression \slurShapeA ( g' g, g' a,-> a' |
   b,8-> b' b, b' b, b' |
   g,8-> g' g, g' a,-> a' |
   b,8-> b' b, b' a,-> a' |
@@ -87,7 +108,7 @@ highVoice = \relative {
   e4 ) e8 ( d c4 ) |
   r4 g8 ( b d4 ) |
   r4 g,8 ( c e4 ) |
-  g,!8 ( a g fs g e' |
+  g,?8 ( a g fs g e' |
   
   \barNumberCheck #53
   c4 _\saignant ) r e8 ( c |
@@ -96,7 +117,7 @@ highVoice = \relative {
   g'8 g, e' g g, e' |
   d8 c e4 ) e,8 ( c |
   b8 d g4 ) g8 ( f |
-  e8 g c4 ) e8 _( c |
+  e8 g c4 ) e8 \slurShapeB _( c |
   g8 f' b \octaveUp d f d |
   c4 e,8 g' c,4 ) |
 }
@@ -109,7 +130,7 @@ upperMiddle = \relative c'' {
   s2. |
   s4 <b, d gs> q |
   s4 << { \shiftOn <c e a>4 <c e> }
-        \new Voice { \voiceTwo s4 ( b'8 a ) } 
+        \new Voice { \voiceFour c4 ( \voiceTwo \beamLengthsA b'8 a ) } 
      >> |
   s2. * 3 |
   
@@ -139,20 +160,23 @@ upperMiddle = \relative c'' {
   s2. |
   s4 <b, d gs> q |
   s4 << { \shiftOn <c e a>4 <c e> }
-        \new Voice { \voiceTwo s4 ( b'8 a ) } 
+        \new Voice { \voiceFour c4 ( \voiceTwo \beamLengthsA b'8 a ) } 
      >> |
   s2. * 3 |
   
   \barNumberCheck #53
   s2. * 5 |
-  f!8 ( a g f e d ) |
+  f8 ( a g f e d ) |
   s2. |
   s2. |
   s2 <g' c e>4-.-- |
 }
 
 lowerMiddle = \relative c' {
-  \repeat unfold 4 { r4 << { g8 ( b f'4 ) } \\ { s4 <g, c> } >> | }
+  \repeat unfold 4 { r4 << { g8 ( b f'4 ) } 
+                           \\ 
+                           { \voiceFour s4 \shortenStemA <g, c> } 
+                        >> | }
   
   \barNumberCheck #5
   s4 << { <gs f'>4 <gs! f'> } \\ { d'4 ( c8 b ) } >> |
@@ -161,11 +185,12 @@ lowerMiddle = \relative c' {
   s2. |
   s4 << { <d f>4 q } \\ { c4 ( as8 b ) } >> |
   s4 << { <c e>4 q } \\ { b4 ( gs8 a ) } >> |
-  s4 <f a d> <g b e> |
+  s4 \oneVoice <f a d> <g b e> |
   
   \barNumberCheck #12
   s2. |
   s2. |
+  \voiceThree
   s4 <c e>2 |
   s2. * 3 |
   s4 <c e>2 |
@@ -186,7 +211,11 @@ lowerMiddle = \relative c' {
   s2. * 8 |
   
   \barNumberCheck #42
-  \repeat unfold 4 { r4 << { g8 ( b f'4 ) } \\ { s4 <g, c> } >> | }
+  \repeat unfold 4 { r4 << 
+                          { g8 ( b f'4 ) } 
+                          \\ 
+                          { \voiceFour s4 \shortenStemA <g, c> } 
+                        >> | }
   
   \barNumberCheck #46
   s4 << { <gs f'>4 <gs! f'> } \\ { d'4 ( c8 b ) } >> |
@@ -195,11 +224,12 @@ lowerMiddle = \relative c' {
   s2. |
   s4 << { <d f>4 q } \\ { c4 ( as8 b ) } >> |
   s4 << { <c e>4 q } \\ { b4 ( gs8 a ) } >> |
-  s4 <f a d> <g b e> |
+  s4 \oneVoice <f a d> ( <g b e> ) |
   
   \barNumberCheck #53
   s2. |
   s2. |
+  \voiceThree
   s4 <c e>2 |
   s2. * 3 |
   s4 <c e>2 |
@@ -223,12 +253,12 @@ lowVoice = \relative c, {
   c8 ( g' e' g c e |
   \staffUp f!8 a g f e d ) | \staffDown
   c,4-. fs ( g ) |
-  e,4-. <g' b e> q |
-  c,,4-. <g'' c e> q |
+  e,4-. <g' b e>^. q^. |
+  c,,4-. <g'' c e>^. q^. |
   s2. |
   c,4-. fs ( g ) |
   df4-. af' ( g ) |
-  c,4-. <g' c e>-. s |
+  c,4-. <g' c e>^. s |
   
   \barNumberCheck #21
   \autoBeamOff
@@ -239,32 +269,32 @@ lowVoice = \relative c, {
   \autoBeamOn
   
   \barNumberCheck #25
-  <g,,, g'>4 r <f'' g b d>-. |
-  <e g b e>4-> r r |
-  <g,, g'>4-> r <fs'' a cs e>-. |
-  <f! a b ds>4-> r r |
-  <e,, e'>4-> r <d''! e gs b>-. |
-  <a e' c'>4-> r <af' c d>-. |
-  <bf d>4-> r <es, b'! cs>-. |
-  <fs a cs>4-> r <f! af b>-. |
+  <g,,, g'>4 ^\tresTurc \oneVoiceRest r <f'' g b d>-. |
+  <e g b e>4-> \oneVoiceRest r \oneVoiceRest r |
+  <g,, g'>4-> \oneVoiceRest r <fs'' a cs e>-. |
+  <f! a b ds>4-> \oneVoiceRest r \oneVoiceRest r |
+  <e,, e'>4-> \oneVoiceRest r <d''! e gs b>-. |
+  <a e' c'>4-> \oneVoiceRest r <af' c d>-. |
+  <bf d>4-> \oneVoiceRest r <es, b'! cs>-. |
+  <fs a cs>4-> \oneVoiceRest r <f! af b>-. |
   
   \barNumberCheck #33
-  <g,, g'>4-> r <f'' g b d>-. |
-  <e g b e>4-> r r |
-  <g,, g'>4-> r <fs'' a cs e>-. |
-  <f! a b ds>4-> r r |
-  <e,, e'>4-> r <d''! e gs b>-. |
-  <a e' c'>4-> r r |
+  <g,, g'>4-> \oneVoiceRest r <f'' g b d>-. |
+  <e g b e>4-> \oneVoiceRest r \oneVoiceRest r |
+  <g,, g'>4-> \oneVoiceRest r <fs'' a cs e>-. |
+  <f! a b ds>4-> \oneVoiceRest r \oneVoiceRest r |
+  <e,, e'>4-> \oneVoiceRest r <d''! e gs b>-. |
+  <a e' c'>4-> \oneVoiceRest r \oneVoiceRest r |
   d,,8 ( d' a' d fs a |
   <g,, g'>4-> ) s s |
   s2. |
   
   \barNumberCheck #42
-  <g g'>4-. r <f! f'!>-. |
+  <g g'>4-. \moveTextA _\reprendre r <f! f'!>-. |
   \repeat unfold 3 { <g g'>4-. r <f f'>-. | }
   
   \barNumberCheck #46
-  <g g'>4-> s2 |
+  <g g'>4 s2 |
   g'?4-. s2 |
   g4-. s2 |
   g4-. s2 |
@@ -274,7 +304,7 @@ lowVoice = \relative c, {
   
   \barNumberCheck #53
   c8 ( g' e' g c e |
-  \staffUp f!8 a g f e d ) | \staffDown
+  \staffUp f8 a g f e d ) | \staffDown
   c,4-. fs ( g ) |
   e,4-. <g' b e> q |
   c,,4-. <g'' c e> q |
@@ -360,18 +390,17 @@ lower = {
   <<
     \new Voice { \voiceThree \lowerMiddle }
     \new Voice { \voiceFour \lowVoice }
-    \new Devnull \forceBreaks
   >>
 }
 
-musicTyrolienne = 
-\score {
+musicTyrolienne = \score {
   \new PianoStaff \with {
     %\override StaffGrouper.staff-staff-spacing.padding = #5
   } <<
     \new Staff = "upper" \upper
     \new Dynamics { \global \dynamics }
     \new Staff = "lower" \lower
+    \new Devnull \forceBreaks
   >> 
   \header {
     title = ""
@@ -382,8 +411,7 @@ musicTyrolienne =
 
 \include "articulate.ly"
 
-midiTyrolienne = 
-\book {
+midiTyrolienne = \book {
   \bookOutputName "tyrolienne-music"
   \score {
     \articulate <<

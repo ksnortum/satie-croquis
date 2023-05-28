@@ -543,14 +543,17 @@ musicDanse = \score {
 
 \include "articulate.ly"
 
-midiDanse = \score {
-  \articulate <<
-    \new PianoStaff <<
-      \new Staff ="upper" \upper
-      \new Staff = "lower" \lower
+midiDanse = \book {
+  \bookOutputName "danse-music"
+  \score {
+    \articulate <<
+      \new PianoStaff <<
+        \new Staff ="upper" \upper
+        \new Staff = "lower" \lower
+      >>
     >>
-  >>
-  \midi { 
-    \tempo 4 = 100
+    \midi { 
+      \tempo 4 = 100
+    }
   }
 }

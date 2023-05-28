@@ -13,7 +13,9 @@
 * **Un peu chaud** - A little hot
 * **Du bout des yeux et retenu d'avance** - After the eye and held in advance
 * **Beaucoup d'expression et plus lent** - Very expressively and slower
+* **Très Turc** - Very Turkish
 * **Impassible** - Impassive
+* **Reprendre** - Resume
 * **Encore** - Again
 * **peu saignant** - Slightly bloody
 
@@ -56,8 +58,8 @@
 **Note:** Satie is often mixing Spanish and French, switching words in well-known Paris locations 
 
 #### Musical Terms
-* **\retenir** - hold back
+* **retenir** - hold back
 * **Au mouvement** - A tempo
-* **\Arrêt** - Stop
-* **\diminez** - get softer?
+* **Arrêt** - Stop
+* **diminez** - get softer
 * **ralentir** - slow down

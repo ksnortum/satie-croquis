@@ -544,14 +544,17 @@ musicEspanana = \score {
 
 \include "articulate.ly"
 
-midiEspanana = \score {
-  \articulate <<
-    \new PianoStaff <<
-      \new Staff ="upper" \upper
-      \new Staff = "lower" \lower
+midiEspanana = \book {
+  \bookOutputName "espanana-music"
+  \score {
+    \articulate <<
+      \new PianoStaff <<
+        \new Staff ="upper" \upper
+        \new Staff = "lower" \lower
+      >>
     >>
-  >>
-  \midi { 
-    \tempo 4 = 200
+    \midi { 
+      \tempo 4 = 200
+    }
   }
 }

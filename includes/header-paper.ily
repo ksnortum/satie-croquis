@@ -1,7 +1,7 @@
 \version "2.24.0"
 
 \header {
-  title        = "Croquis & Agaceries D'un Gros Bonhomme En Bois"
+  title        = "Croquis et Agaceries d'un Gros Bonhomme en Bois"
   composer     = "Erik Satie (1866-1925)"
   style        = "Avant-garde"
   source       = "https://vmirror.imslp.org/files/imglnks/usimg/d/dc/IMSLP08107-'un_Gros_Bonhomme_en_Bois.pdf"
