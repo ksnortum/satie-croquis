@@ -13,7 +13,7 @@
 % -------------------
 
 shortenStemA = \tweak Stem.length 8 \etc
-beamLengthsA = \tweak Beam.positions #'(-3.5 . -4) \etc
+beamLengthsA = \tweak Beam.positions #'(-3 . -3.5) \etc
 accentInsideSlur = \override Script.avoid-slur = #'inside
 moveTextA = \tweak X-offset -2 \etc
 
@@ -23,7 +23,8 @@ slurShapeA = \shape #'(
                         ()
                         ((0 . 0) (0 . -7) (0 . -5) (0 . 4))
                       ) \etc
-slurShapeB = \shape #'((0 . 0) (0 . 0) (0 . -1) (-0.5 . 2)) \etc
+slurShapeB = \shape #'((0 . 0) (0 . 0) (0 . -1.5) (-0.5 . 2)) \etc
+slurPositionA = \tweak positions #'(-2 . -2) \etc
 
 oneVoiceRest =
 #(define-music-function (rest) (ly:music?)
@@ -104,7 +105,7 @@ highVoice = \relative {
   \barNumberCheck #46
   r4 g,?8 ^\encore ( b d4 ) |
   r4 g,8 (c e4 ) |
-  r4 f8 ( g? f g |
+  r4 f8 ( g! f g |
   e4 ) e8 ( d c4 ) |
   r4 g8 ( b d4 ) |
   r4 g,8 ( c e4 ) |
@@ -136,7 +137,7 @@ upperMiddle = \relative c'' {
   
   \barNumberCheck #12
   s2. * 5 |
-  f!8 ( a g f e d ) |
+  f8 ( a g f e d ) |
   s2. |
   s2. |
   s2 <g c e>4-.-- |
@@ -252,12 +253,12 @@ lowVoice = \relative c, {
   \barNumberCheck #12
   c8 ( g' e' g c e |
   \staffUp f!8 a g f e d ) | \staffDown
-  c,4-. fs ( g ) |
+  c,4-. fs \slurPositionA ( g ) |
   e,4-. <g' b e>^. q^. |
   c,,4-. <g'' c e>^. q^. |
   s2. |
-  c,4-. fs ( g ) |
-  df4-. af' ( g ) |
+  c,4-. fs \slurPositionA ( g ) |
+  df4-. af' \slurPositionA ( g ) |
   c,4-. <g' c e>^. s |
   
   \barNumberCheck #21
@@ -305,12 +306,12 @@ lowVoice = \relative c, {
   \barNumberCheck #53
   c8 ( g' e' g c e |
   \staffUp f8 a g f e d ) | \staffDown
-  c,4-. fs ( g ) |
+  c,4-. fs \slurPositionA ( g ) |
   e,4-. <g' b e> q |
   c,,4-. <g'' c e> q |
   s2. |
-  c,4-. fs ( g ) |
-  df4-. af' ( g ) |
+  c,4-. fs \slurPositionA ( g ) |
+  df4-. af' \slurPositionA ( g ) |
   c,4-. <g' c e>-. s |
 }
 
@@ -343,8 +344,8 @@ dynamics = {
   \barNumberCheck #53
   s2. * 6 |
   s2 s4 -\retardez |
-  s2. |
-  s2. |
+  s2 s4\> |
+  s4 s2\! |
 }
 
 forceBreaks = {
@@ -363,7 +364,6 @@ forceBreaks = {
   \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
   \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
   \repeat unfold 3 { s2.\noBreak } s2.\pageBreak
-  
 }
 
 % -----------------------

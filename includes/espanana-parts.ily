@@ -17,6 +17,9 @@
 
 forceHShift = \once \override NoteColumn.force-hshift = -1
 
+slurShapeA = \shape #'((0 . 0) (0 . 0) (0 . 1) (0 . 0)) \etc
+slurShapeB = \shape #'((0 . 0) (0 . 0) (0 . -1) (0 . 0)) \etc
+
 % --- Text
 phraseValse = "Sorte de Valse"
 valse = \markup { \upright \phraseValse }
@@ -72,8 +75,9 @@ highVoice = \relative {
   q8-> q-. q4-. s |
   s4 <d g>8-. q-. q4-. |
   q8-> q-. q4-. s |
+  s2. |
   s2. -\doigts |
-  s2. * 3 |
+  s2. * 2 |
   
   \barNumberCheck 25
   r4 ^\f <d' f>8-. q-. q4-. |
@@ -83,8 +87,8 @@ highVoice = \relative {
   d,!8 ( ef e f fs g |
   gs8 a bf b c cs |
   <b! d?> ^\ff ) q-. q-. q-. q-. q-. |
-  <b d>4-. \acciaccatura { c8 } <g b>4-. <f a>-. |
-  \acciaccatura { a8 } <e g>4-. <d? f>-. <c e>-. |
+  <b d>4-. \slashedGrace { c8 } <g b>4-. <f a>-. |
+  \slashedGrace { a8 } <e g>4-. <d? f>-. <c e>-. |
   
   \barNumberCheck 34
   b'4\rest g8-. g-. g4-. |
@@ -120,9 +124,9 @@ highVoice = \relative {
   \barNumberCheck 63
   \clef bass
   s4 ^\p <a, cs> q |
-  s4 <b! c> r |
+  s4 <bf c?> r |
   s4 <fs as> q |
-  s4 <gs a> r |
+  s4 <g a?> r |
   \clef treble
   b'4\rest b,8 ( <c? e> b4 ) |
   b'4\rest <cs, ef>8 ( q <d g>4 ) |
@@ -135,7 +139,7 @@ highVoice = \relative {
   \staffUp
   f8 bf c f bf f |
   c8 f bf c f c ) |
-  <a d>4-> ( <g b!> <e a> |
+  <a d>4-> \slurShapeA ( <g b!> <e a> |
   <d fs>4-> <b e> <a! cs> |
   <b e>4-> <a cs> <b e> ) |
   s2. |
@@ -145,7 +149,7 @@ highVoice = \relative {
   <a, d g>4-> <a c d>-. <a d f>-. |
   <a c d>4-> r <a d g>-. |
   <a c d>4-> r <c' c'>-. |
-  <f f'>4-> s2 |
+  <f f'>4->
 }
 
 upperMiddle = \relative {
@@ -203,12 +207,12 @@ upperMiddle = \relative {
   g,2. ( |
   a4 \forceHShift bf ) r |
   e,2. ( |
-  fs4 \forceHShift g! ) r |
+  fs4 \forceHShift g ) r |
   s2. * 4 |
   
   \barNumberCheck 71
   s2. * 3 |
-  <c' e>4-> ( <df f> <g, b> |
+  <c' e>4-> \slurShapeB ( <df f> <g, b> |
   <af c>4-> <d, fs> <ef g> |
   <d fs>4-> <ef g> <d fs!> ) |
   s2. |
@@ -246,7 +250,7 @@ lowerMiddle = \relative {
   
   \barNumberCheck 34
   g'2.-> _\> _( |
-  af4 ) s \! s |
+  af4 ) <> \! s2 |
   d,?2. _\> _( |
   ef4 ) s \! s |
   g4-> a-. c-. |
@@ -280,7 +284,6 @@ lowerMiddle = \relative {
   <d, f!>4 ( <ef g> <f a> ) |
   <d f>4 ( <ef g> <f a> ) |
   s2. |
-  
 }
 
 lowVoice = \relative {
@@ -337,9 +340,9 @@ lowVoice = \relative {
   <e e'>-> <d d'>-. <f f'>-. |
   <a' b e>8 q q4-> <d,, d'> ( |
   <c c'>4 ) s2 |
-  <c c'>4 s2 |
-  <c c'>4 s2 |
-  <c c'>4 s2 |
+  <c c'>4 -_ s2 |
+  <c c'>4 -_ s2 |
+  <c c'>4 -_ s2 |
   
   \barNumberCheck 63
   r4 f'8-. f-. f4-. |
@@ -363,7 +366,7 @@ lowVoice = \relative {
   c8 ( d e!4 ) c8 ( d |
   e4 ) r c8 ( d |
   e4 ) r <c, c'>-. |
-  <f, f'>-> s2
+  <f, f'>-> 
 }
 
 % --- Dynamics, text, and musical terms
@@ -420,6 +423,8 @@ dynamicsHigh = {
   \barNumberCheck 78
   s2. * 3 |
   s8 \f s -\aTempo s2 |
+  s4 s2\< |
+  s4. s8\! s4 |
 }
 
 dynamics = {

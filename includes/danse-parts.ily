@@ -9,6 +9,9 @@
 % ------------------------------
 
 % Bar 11, low bass voice, added an eight rest for clarity
+% Bar 34, high treble voice, third beat, slur starts on first beat of bar 35
+% Bar 36, low bass voice, slur end on first beat
+% Bar 42, ditto
 % Bar 52, high treble voice, second 8th s/b an ef
 % Bar 62, high voice in bass clef, cs s/b dotted eighth
 
@@ -32,6 +35,10 @@ shapeTwo = \shapeTieColumn #' (
              (( (0 . 0.25) (0 . 0.5) (0 . 0.5) (0 . 0.25) ))
            )
 
+moveFA = \once \override DynamicText.extra-offset = #'(-5 . -4)
+moveFB = \once \override DynamicText.extra-offset = #'(-2 . -1)
+moveEn = \once \override TextScript.extra-offset = #'(3 . -2.75)
+
 % --- Musical text
 lent = "Assez lent, si vous le voulez bien"
 loin = "De loin et avec ennui"
@@ -47,7 +54,7 @@ continuez = "Continuez"
 plein = "Plein de subtilité, si vous m'en croyez"
 bruit = "Sans bruit, croyez-moi encore"
 retenir = "Retenir"
-ppRal = \markup { \dynamic pp \italic { ralentir ( très ) } }
+ppRal = \markup { \dynamic pp \italic { ralentir (très) } }
 souffle = "en un souffle"
 
 % -------------
@@ -64,7 +71,7 @@ highVoice = \relative {
   
   \barNumberCheck #5
   <d, f>16-. q-. <ef g>8-. <f a> <gs c>-. |
-  <d f>16-. q-. <ef g>8-. <f a> <gs c>-. |
+  <d f>16-. q-. <ef g!>8-. <f a> <gs c>-. |
   <fs bf>8-. <cs f>-. <cs! f>-.-- r |
   <fs bf>8-. <cs f>-. <cs! f>-.-- r |
   
@@ -83,19 +90,19 @@ highVoice = \relative {
   \barNumberCheck #17
   a8 ( a' ^\rougir ) g,? ( g' ) |
   f, ( f' ) e, ( e' ) |
-  d16 ( a? d!8 ) d!16 ( a? d8 ) |
+  d16 ( a? d!8 ) d!16 ( a! d8 ) |
   g,4 ~ g8 r |
   
   \barNumberCheck #21
   \clef bass
-  <g, bf>16 ( <a d> <g bf> <a d> <g bf> <a d> <g bf> <a d>  |
+  <g, bf>16 ( <a d> <g bf> <a d> <g bf!> <a d> <g bf> <a d>  |
   <g bf>4 ~ q8 ) r |
   ef16 ( gs fs a ef! gs! fs! a |
   fs4-> ~ fs8 ) r |
   
   % \barNumberCheck #25
   \clef treble
-  \acciaccatura { e'''!8 } <e, d'>8 s \acciaccatura { e'8 } <e, d'>8 s |
+  \acciaccatura { e'''!8 } \moveFA <e, d'>8^\f s \acciaccatura { e'8 } <e, d'>8 s |
   \acciaccatura { e'8 } <e, d'>8 s \acciaccatura { e'8 } <e, d'>8 s |
   a,!16 ^\dehors ( gs fs8 f16 e d8 |
   cs8. b16 as8-> ) r |
@@ -137,7 +144,7 @@ highVoice = \relative {
   g8 ( ef f4 ) |
   
   \barNumberCheck #53
-  cs'16 ^\f ( b! a b cs b! a b |
+  \moveFB cs'16 ^\f ( b! a b cs b! a b |
   cs16 b! a b cs b! a b |
   df c! b! bf a af g fs |
   f16 e ef d df c b bf |
@@ -153,7 +160,7 @@ highVoice = \relative {
   b,?8 ( c cs4 )
   b8 c! cs8. \fermata fs16 \fermata |
   \staffUp
-  d'16 _\souffle ( e fs g a bf c? d |
+  d'16 ( e fs g a bf c? d |
   e8-. ) s s4
 }
 
@@ -164,8 +171,8 @@ upperMiddle = \relative {
   q2 |
   
   \barNumberCheck #5
-  s4. e16 ( c ) |
-  s4. e16 ( c ) |
+  s4. ef16 ( c ) |
+  s4. ef16 ( c ) |
   d16 ( bf ) a ( f ) a ( f ) r8 |
   d'16 ( bf ) a ( f ) a ( f ) r8 |
   
@@ -183,7 +190,7 @@ upperMiddle = \relative {
   a8 s g s |
   f8 s e s |
   s2 |
-  r8 <a, ef'> r <a ef'> |
+  r8 <a, ef'> r <a ef'!> |
   
   \barNumberCheck #21
   s2 * 4 |
@@ -314,7 +321,7 @@ lowerMiddle = \relative {
   \barNumberCheck #61
   s2 * 2 |
   \clef treble
-  c'!2 ( |
+  \moveEn c'!2 -\souffle ( |
   b!4 ~ b8 ) r |
 }
 
@@ -401,7 +408,7 @@ lowVoice = \relative {
   f8 ( <b! cs f> ) e, ( <a b e> ) |
   d,8 ( <g a d> ) c,? ( <f g c> ) |
   f8 ( as ) b ( c ) |
-  <c,, c'>8 r <a a'> r |
+  <c,, c'>8-. r <a a'>-. r |
   
   \barNumberCheck #61
   <e! e'!>8 s <a a'> s |
@@ -413,6 +420,7 @@ lowVoice = \relative {
 
 % --- Includes musical terms
 dynamics = {
+  \override TextScript.Y-offset = -0.5
   s2 \pp |
   s2 * 3 |
   \break
@@ -439,8 +447,7 @@ dynamics = {
   s2 * 3 |
   
   \barNumberCheck #25
-  s2 \f |
-  s2 * 3 |
+  s2 * 4 |
   
   \barNumberCheck #29
   s2 * 4 |
@@ -478,7 +485,7 @@ dynamics = {
   s2 -\ppRal |
   s2 |
   s8 s \> s4 |
-  s8 s \! s4 |
+  s16 s \! s4. |
 }
 
 forceBreaks = {
