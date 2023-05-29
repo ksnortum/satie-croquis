@@ -33,7 +33,7 @@ oneVoiceRest =
   #})
 
 % --- Musical text
-lent = "Avec précaution et lent "
+lent = "Avec précaution et lent"
 gosier = "Dans le gosier"
 chaud = "Un peu chaud"
 yeux = "Du bout des yeux et retenu d'avance"
@@ -394,9 +394,7 @@ lower = {
 }
 
 musicTyrolienne = \score {
-  \new PianoStaff \with {
-    %\override StaffGrouper.staff-staff-spacing.padding = #5
-  } <<
+  \new PianoStaff <<
     \new Staff = "upper" \upper
     \new Dynamics { \global \dynamics }
     \new Staff = "lower" \lower
