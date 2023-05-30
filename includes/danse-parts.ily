@@ -62,7 +62,8 @@ souffle = "en un souffle"
 % -------------
 
 highVoice = \relative {
-  \tempo \lent
+  \set Score.tempoHideNote = ##t 
+  \tempo \lent 4 = 60
 
   c'''8 ( [ a g a ] |
   c [ a g a ]~ |
@@ -70,6 +71,7 @@ highVoice = \relative {
   a2 ) |
   
   \barNumberCheck #5
+  \tempo 4 = 100
   <d, f>16-. q-. <ef g>8-. <f a> <gs c>-. |
   <d f>16-. q-. <ef g!>8-. <f a> <gs c>-. |
   <fs bf>8-. <cs f>-. <cs! f>-.-- r |
@@ -146,10 +148,12 @@ highVoice = \relative {
   \barNumberCheck #53
   \moveFB cs'16 ^\f ( b! a b cs b! a b |
   cs16 b! a b cs b! a b |
-  df c! b! bf a af g fs |
-  f16 e ef d df c b bf |
+  df16 c! b! bf \tempo 4 = 94 a af g fs |
+  \tempo 4 = 88
+  f16 e ef d df \tempo 4 = 82 c b bf |
   
   \barNumberCheck #57
+  \tempo 4 = 100
   a8 a' ) g, ( g' ) |
   f, ( f' ) e, ( e' ) |
   d!16 ( a? d!8 ) d!16 ( a? d8 ) |
@@ -157,9 +161,12 @@ highVoice = \relative {
   
   \barNumberCheck #61
   \staffDown
+  \tempo 4 = 80
   b,?8 ( c cs4 )
-  b8 c! cs8. \fermata fs16 \fermata |
+  \tempo 4 = 60
+  b8 c! cs8. \fermata \tempo 4 = 10 fs16 \fermata |
   \staffUp
+  \tempo 4 = 100
   d'16 ( e fs g a bf c? d |
   e8-. ) s s4
 }
@@ -390,10 +397,10 @@ lowVoice = \relative {
   bf,8 [ <d f!> a <d f> ] ) |
   
   \barNumberCheck #45
-  a,8-. <e' b'?>-. a,-. <e' b'> |
-  a,8-. <e' b'>-. a,-. <e' b'> |
-  c8-. <g' d'> c,8-. <g' d'> |
-  c,8-. <g' d'> c,8-. <g' d'> |
+  a,8-. <e' b'?>-. a,-. <e' b'>-. |
+  a,8-. <e' b'>-. a,-. <e' b'>-. |
+  c8-. <g' d'>-. c,8-. <g' d'>-. |
+  c,8-. <g' d'>-. c,8-. <g' d'>-. |
   
   \barNumberCheck #49
   s2 * 4 |
@@ -548,19 +555,13 @@ musicDanse = \score {
   }
 }
 
-\include "articulate.ly"
-
 midiDanse = \book {
   \bookOutputName "danse-music"
   \score {
-    \articulate <<
-      \new PianoStaff <<
-        \new Staff ="upper" \upper
-        \new Staff = "lower" \lower
-      >>
+    <<
+      \new Staff ="upper" << \upper \dynamics >>
+      \new Staff = "lower" << \lower \dynamics >>
     >>
-    \midi { 
-      \tempo 4 = 100
-    }
+    \midi {}
   }
 }

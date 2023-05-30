@@ -58,6 +58,8 @@ ralentir = "ralentir"
 % -------------
 
 highVoice = \relative {
+  \set Score.tempoHideNote = ##t
+  \tempo 4 = 200
   s2. * 8 |
   
   \barNumberCheck 9
@@ -87,10 +89,13 @@ highVoice = \relative {
   d,!8 ( ef e f fs g |
   gs8 a bf b c cs |
   <b! d?> ^\ff ) q-. q-. q-. q-. q-. |
+  \tempo 4 = 190
   <b d>4-. \slashedGrace { c8 } <g b>4-. <f a>-. |
+  \tempo 4 = 180
   \slashedGrace { a8 } <e g>4-. <d? f>-. <c e>-. |
   
   \barNumberCheck 34
+  \tempo 4 = 200
   b'4\rest g8-. g-. g4-. |
   af8-. af-. af4-. c-. |
   b4\rest d,8-. d-. d4-. |
@@ -281,8 +286,11 @@ lowerMiddle = \relative {
   s2. * 7 |
   
   \barNumberCheck 78
+  \tempo 4 = 120
   <d, f!>4 ( <ef g> <f a> ) |
+  \tempo 4 = 112
   <d f>4 ( <ef g> <f a> ) |
+  \tempo 4 = 200
   s2. |
 }
 
@@ -547,19 +555,13 @@ musicEspanana = \score {
   }
 }
 
-\include "articulate.ly"
-
 midiEspanana = \book {
   \bookOutputName "espanana-music"
   \score {
-    \articulate <<
-      \new PianoStaff <<
-        \new Staff ="upper" \upper
-        \new Staff = "lower" \lower
-      >>
+    <<
+      \new Staff ="upper" << \upper \dynamicsHigh \dynamics >>
+      \new Staff = "lower" << \lower \dynamicsHigh \dynamics >>
     >>
-    \midi { 
-      \tempo 4 = 200
-    }
+    \midi {}
   }
 }

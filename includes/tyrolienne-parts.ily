@@ -3,11 +3,6 @@
 
 \include "global-variables.ily"
 
-% ------------------------------
-% --- Changes from the score ---
-% ------------------------------
-
-
 % -------------------
 % --- Definitions ---
 % -------------------
@@ -50,7 +45,8 @@ retardez = "retardez"
 % -------------
 
 highVoice = \relative {
-  \tempo \lent
+  \set Score.tempoHideNote = ##t 
+  \tempo \lent 4 = 120
   s2. * 4 |
   
   \barNumberCheck #5
@@ -119,7 +115,9 @@ highVoice = \relative {
   d8 c e4 ) e,8 ( c |
   b8 d g4 ) g8 ( f |
   e8 g c4 ) e8 \slurShapeB _( c |
+  \tempo 4 = 110
   g8 f' b \octaveUp d f d |
+  \tempo 4 = 100
   c4 e,8 g' c,4 ) |
 }
 
@@ -407,19 +405,13 @@ musicTyrolienne = \score {
   }
 }
 
-\include "articulate.ly"
-
 midiTyrolienne = \book {
   \bookOutputName "tyrolienne-music"
   \score {
-    \articulate <<
-      \new PianoStaff <<
-        \new Staff ="upper" \upper
-        \new Staff = "lower" \lower
-      >>
+    <<
+      \new Staff ="upper" << \upper \dynamics >>
+      \new Staff = "lower" << \lower \dynamics >>
     >>
-    \midi { 
-      \tempo 4 = 120
-    }
+    \midi {}
   }
 }
