@@ -20,6 +20,7 @@
 \paper {
   print-all-headers = ##t
   
+  system-system-spacing.padding = #2
   top-margin = 8\mm                              %-minimum top-margin: 8mm
   top-markup-spacing.basic-distance = #5         %-dist. from bottom of top margin to the first markup/title
   markup-system-spacing.basic-distance = #6      %-dist. from header/title to first system
@@ -30,6 +31,8 @@
   ragged-bottom = ##f
   ragged-last-bottom = ##f
   ragged-right = ##f
+  
+  #(set-paper-size "letter")
 }
 
 \layout { 
